@@ -2,7 +2,7 @@
   "name": "f1-sweepstake-react-spa",
   "private": true,
   "version": "0.0.0",
-  "homepage": "https://will-marriott.github.io/f1-sweepstake-react-spa/",
+  "homepage": "https://will-marriott.github.io/f1-sweepstake-react-spa",
   "type": "module",
   "scripts": {
     "dev": "vite",
