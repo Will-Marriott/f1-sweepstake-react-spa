@@ -169,8 +169,8 @@ function App() {
 
   return (
     <div className="w-full h-screen flex flex-col items-center pb-4  dark:bg-gray-800 dark:text-white">
-      <div className="flex flex-col items-center w-full max-w-4xl p-2 bg-white dark:bg-red-600 rounded-lg shadow-md">
-        <h1 className="text-2xl font-bold my-4 font-orbitron">
+      <div className="flex flex-col items-center w-full max-w-4xl p-2 bg-red-600 rounded-lg shadow-md">
+        <h1 className="text-2xl font-bold my-4 font-orbitron text-white">
           F1 Driver Assignment
         </h1>
       </div>
