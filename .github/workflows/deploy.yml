@@ -3,7 +3,7 @@ name: Deploy Vite App to GitHub Pages
 on:
   push:
     branches:
-      - main # This workflow will run whenever you push to the 'main' branch
+      - master # This workflow will run whenever you push to the 'master' branch
 
 jobs:
   deploy:
