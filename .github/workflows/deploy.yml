@@ -3,11 +3,15 @@ name: Deploy Vite App to GitHub Pages
 on:
   push:
     branches:
-      - master # This workflow will run whenever you push to the 'master' branch
+      - main # This workflow will run whenever you push to the 'main' branch
 
 jobs:
   deploy:
     runs-on: ubuntu-latest # Specifies the operating system for the job
+    permissions:
+      contents: write # Grant write permission to the GITHUB_TOKEN for this job
+      pages: write # Grant write permission for GitHub Pages deployment
+      id-token: write # Grant ID token permission for Pages deployment
 
     steps:
       - name: Checkout repository # Step to check out your repository code
