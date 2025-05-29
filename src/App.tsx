@@ -9,6 +9,11 @@ interface DriverStanding {
   points: string;
 }
 
+interface NextRaceInfo {
+  raceName: string;
+  round: string;
+}
+
 const droppedDrivers = ["Doohan"];
 const players = [
   "Will",
@@ -52,10 +57,6 @@ function App() {
   const NEXT_RACE_URL = "next/races/";
 
   const [driverStandings, setDriverStandings] = useState<DriverStanding[]>([]);
-  interface NextRaceInfo {
-    raceName: string;
-    round: string;
-  }
 
   const [nextRaceInfo, setNextRaceInfo] = useState<NextRaceInfo>(
     {} as NextRaceInfo
@@ -109,7 +110,7 @@ function App() {
     };
 
     fetchDriverStandings();
-  }, []);
+  }, [driverStandings.length]);
 
   const [top10Drivers, bottom10Drivers] = driverStandings.reduce(
     (acc, driver, index) => {
@@ -149,28 +150,36 @@ function App() {
     }
 
     return (
-      <table className="table-auto border-collapse border border-gray-300">
-        <thead>
-          <tr>
-            <th className="border border-gray-300 px-4 py-2">Player</th>
-            <th className="border border-gray-300 px-4 py-2">Driver 1</th>
-            <th className="border border-gray-300 px-4 py-2">Driver 2</th>
-          </tr>
-        </thead>
-        <tbody>
-          {players.map((player, index) => (
-            <tr key={index}>
-              <td className="border border-gray-300 px-4 py-2">{player}</td>
-              <td className="border border-gray-300 px-4 py-2">
-                {randomisedTop10Drivers[index]?.Driver.familyName || "N/A"}
-              </td>
-              <td className="border border-gray-300 px-4 py-2">
-                {randomisedBottome10Drivers[index]?.Driver.familyName || "N/A"}
-              </td>
+      <>
+        {nextRaceInfo && (
+          <div className="my-4">
+            <p className="text-lg">{nextRaceInfo.raceName}:</p>
+          </div>
+        )}
+        <table className="table-auto border-collapse border border-gray-300">
+          <thead>
+            <tr>
+              <th className="border border-gray-300 px-4 py-2">Player</th>
+              <th className="border border-gray-300 px-4 py-2">Driver 1</th>
+              <th className="border border-gray-300 px-4 py-2">Driver 2</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {players.map((player, index) => (
+              <tr key={index}>
+                <td className="border border-gray-300 px-4 py-2">{player}</td>
+                <td className="border border-gray-300 px-4 py-2">
+                  {randomisedTop10Drivers[index]?.Driver.familyName || "N/A"}
+                </td>
+                <td className="border border-gray-300 px-4 py-2">
+                  {randomisedBottome10Drivers[index]?.Driver.familyName ||
+                    "N/A"}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </>
     );
   };
 
@@ -181,11 +190,6 @@ function App() {
           F1 Sweepstake Drivers
         </h1>
       </div>
-      {nextRaceInfo && (
-        <div className="my-4">
-          <p className="text-lg">{nextRaceInfo.raceName}:</p>
-        </div>
-      )}
       {renderContent()}
     </div>
   );
