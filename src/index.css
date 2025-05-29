@@ -2,7 +2,30 @@
 @import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap");
 @import "tailwindcss";
 
+
 @theme {
   --font-sans: "Titillium Web", sans-serif;
   --font-orbitron: "Orbitron", sans-serif;
+}
+
+@layer base
+{
+
+  html,
+  body,
+  #root
+  {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+}
+@media (prefers-color-scheme: dark)
+{
+  #root
+  {
+    background-color: var(--background-color, #1e2939);
+    color: var(--text-color, #ffffff);
+  }
 }

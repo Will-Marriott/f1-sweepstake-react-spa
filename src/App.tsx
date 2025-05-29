@@ -52,7 +52,14 @@ function App() {
   const NEXT_RACE_URL = "next/races/";
 
   const [driverStandings, setDriverStandings] = useState<DriverStanding[]>([]);
-  const [nextRaceInfo, setNextRaceInfo] = useState<any>(null);
+  interface NextRaceInfo {
+    raceName: string;
+    round: string;
+  }
+
+  const [nextRaceInfo, setNextRaceInfo] = useState<NextRaceInfo>(
+    {} as NextRaceInfo
+  );
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
@@ -168,10 +175,10 @@ function App() {
   };
 
   return (
-    <div className="w-full h-screen flex flex-col items-center pb-4  dark:bg-gray-800 dark:text-white">
+    <div className="w-screen min-h-dvh flex flex-col items-center pb-4 grow dark:bg-slate-800 dark:text-white">
       <div className="flex flex-col items-center w-full max-w-4xl p-2 bg-red-600 rounded-lg shadow-md">
         <h1 className="text-2xl font-bold my-4 font-orbitron text-white">
-          F1 Driver Assignment
+          F1 Sweepstake Drivers
         </h1>
       </div>
       {nextRaceInfo && (
