@@ -137,7 +137,7 @@ function App() {
     );
     const randomisedBottome10Drivers: DriverStanding[] = randomiseArray(
       bottom10Drivers,
-      parseInt(nextRaceInfo.round)
+      parseInt(nextRaceInfo.round) + 1
     );
 
     if (
@@ -184,7 +184,7 @@ function App() {
   };
 
   return (
-    <div className="w-screen min-h-dvh flex flex-col items-center pb-4 grow dark:bg-slate-800 dark:text-white">
+    <div className="w-vw h-vh flex flex-col items-center pb-4 grow dark:bg-slate-800 dark:text-white">
       <div className="flex flex-col items-center w-full max-w-4xl p-2 bg-red-600 rounded-lg shadow-md">
         <h1 className="text-2xl font-bold my-4 font-orbitron text-white">
           F1 Sweepstake Drivers
