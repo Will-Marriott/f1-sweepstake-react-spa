@@ -9,6 +9,11 @@ interface DriverStanding {
   points: string;
 }
 
+interface NextRaceInfo {
+  raceName: string;
+  round: string;
+}
+
 const droppedDrivers = ["Doohan"];
 const players = [
   "Will",
@@ -52,7 +57,10 @@ function App() {
   const NEXT_RACE_URL = "next/races/";
 
   const [driverStandings, setDriverStandings] = useState<DriverStanding[]>([]);
-  const [nextRaceInfo, setNextRaceInfo] = useState<any>(null);
+
+  const [nextRaceInfo, setNextRaceInfo] = useState<NextRaceInfo>(
+    {} as NextRaceInfo
+  );
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
@@ -102,7 +110,7 @@ function App() {
     };
 
     fetchDriverStandings();
-  }, []);
+  }, [driverStandings.length]);
 
   const [top10Drivers, bottom10Drivers] = driverStandings.reduce(
     (acc, driver, index) => {
@@ -142,43 +150,46 @@ function App() {
     }
 
     return (
-      <table className="table-auto border-collapse border border-gray-300">
-        <thead>
-          <tr>
-            <th className="border border-gray-300 px-4 py-2">Player</th>
-            <th className="border border-gray-300 px-4 py-2">Driver 1</th>
-            <th className="border border-gray-300 px-4 py-2">Driver 2</th>
-          </tr>
-        </thead>
-        <tbody>
-          {players.map((player, index) => (
-            <tr key={index}>
-              <td className="border border-gray-300 px-4 py-2">{player}</td>
-              <td className="border border-gray-300 px-4 py-2">
-                {randomisedTop10Drivers[index]?.Driver.familyName || "N/A"}
-              </td>
-              <td className="border border-gray-300 px-4 py-2">
-                {randomisedBottome10Drivers[index]?.Driver.familyName || "N/A"}
-              </td>
+      <>
+        {nextRaceInfo && (
+          <div className="my-4">
+            <p className="text-lg">{nextRaceInfo.raceName}:</p>
+          </div>
+        )}
+        <table className="table-auto border-collapse border border-gray-300">
+          <thead>
+            <tr>
+              <th className="border border-gray-300 px-4 py-2">Player</th>
+              <th className="border border-gray-300 px-4 py-2">Driver 1</th>
+              <th className="border border-gray-300 px-4 py-2">Driver 2</th>
             </tr>
-          ))}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {players.map((player, index) => (
+              <tr key={index}>
+                <td className="border border-gray-300 px-4 py-2">{player}</td>
+                <td className="border border-gray-300 px-4 py-2">
+                  {randomisedTop10Drivers[index]?.Driver.familyName || "N/A"}
+                </td>
+                <td className="border border-gray-300 px-4 py-2">
+                  {randomisedBottome10Drivers[index]?.Driver.familyName ||
+                    "N/A"}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </>
     );
   };
 
   return (
-    <div className="w-full h-max flex flex-col items-center pb-4  dark:bg-gray-800 dark:text-white">
+    <div className="w-screen min-h-dvh flex flex-col items-center pb-4 grow dark:bg-slate-800 dark:text-white">
       <div className="flex flex-col items-center w-full max-w-4xl p-2 bg-red-600 rounded-lg shadow-md">
         <h1 className="text-2xl font-bold my-4 font-orbitron text-white">
-          F1 Driver Assignment
+          F1 Sweepstake Drivers
         </h1>
       </div>
-      {nextRaceInfo && (
-        <div className="my-4">
-          <p className="text-lg">{nextRaceInfo.raceName}:</p>
-        </div>
-      )}
       {renderContent()}
     </div>
   );
